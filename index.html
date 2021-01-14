@@ -11,94 +11,9 @@
 <body>
 
   <div id="app">
-
-    <!-- Navbar --> 
-    <nav id="navbar">
-      <div id="logo-navbar">KANBAN</div>
-      <ul class="navbar-ul">
-        <li>{{ username }}</li>
-        <li>
-          <button id="logout-btn" v-on:click="logout">Logout</button>
-        </li>
-      </ul>
-    </nav>
-    <!-- Navbar End -->
-
-    <!-- Login Form -->
-    <div class="row" id="login-form" v-if="page == 'login'">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <form v-on:submit.prevent="login">
-          <input v-model="loginEmail" type="text" placeholder="Email"><br>
-          <input v-model="loginPassword" type="password" placeholder="Password"><br>
-          <button class="btn btn-primary" id="login-btn" type="submit">Login</button>
-        </form>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-    <!-- Login Form End -->
-
-    <!-- Register Form -->
-    <div class="row" id="regis-form" v-if="page == 'register'">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <form v-on:submit.prevent="register">
-          <input v-model="regisEmail" type="text" placeholder="Email"><br>
-          <input v-model="regisUsername" type="text" placeholder="Username"><br>
-          <input v-model="regisPassword" type="password" placeholder="Password"><br>
-          <button class="btn btn-primary" id="regis-btn" type="submit">Register</button>
-        </form>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-    <!-- Register Form End -->
-
-    <!-- Main Page -->
-    <br>
-    <div class="row" id="mainPage" v-if="page == 'mainPage'">
-      <div class="col-md"></div>
-      <div class="col-md category">
-        <div class="card" >
-          <h5 class="card-title">Backlog</h5>
-          <ul>
-            <li v-for="item in tasks">{{ item.title }}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md"></div>
-      <div class="col-md category">
-        <div class="card">
-          <h5 class="card-title">Todo</h5>
-          <ul>
-            <li v-for="item in getTodo">{{ item.title }}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md"></div>
-      <div class="col-md category">
-        <div class="card">
-          <h5 class="card-title">Doing</h5>
-        </div>
-      </div>
-      <div class="col-md"></div>
-    </div>
-    <!-- Main Page End -->
-  
-    <br>
-
-    <!-- Task Form -->
-    <div id="form" v-if="page == 'mainPage'">
-      <form v-on:submit.prevent="addBacklog">
-        <input id="backlog" v-model="backlog">
-        <button type="submit" class="btn btn-primary">Submit!</button>
-      </form>
-    </div>
-    <!-- Task Form End -->
-    
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="main.js"></script>
+  <script src="./src/main.js"></script>
 </body>
 </html>

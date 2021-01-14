@@ -1,8 +1,16 @@
+import Vue from 'vue';
+import App from './App.vue';
+
+new Vue ({
+  render: h => h(App)
+}).$mount('#app');
+
+/*
 const app = new Vue ({
   el: '#app',
   data: {
     username: '',
-    tasks: '',
+    tasks: [],
     backlog: '',
     done: '',
     loginEmail: '',
@@ -14,10 +22,6 @@ const app = new Vue ({
     baseUrl: 'http://localhost:3000',
   },
   methods: {
-    addBacklog: function () {
-      this.tasks.push(this.backlog)
-      this.backlog = ''
-    },
     getAllTasks: function () {
       axios({
         method: 'get',
@@ -61,27 +65,29 @@ const app = new Vue ({
       if (!localStorage.getItem('access_token')) {
         selectedPage = 'login'
       } else {
-        this.getAllTasks()
         this.username = localStorage.getItem('username')
         selectedPage = 'mainPage'
       }
       this.page = selectedPage
     },
-    getAllTodo: function () {
-      let allTasks = this.tasks
-      let todo = allTasks.filter(function (task) {
-        return task.category == 'todo'
-      })
-      return todo
+    todos: function () {
+      let todos = this.getTodo()
+      this
     }
   },
   created: function () {
+    this.getAllTasks()
     this.checkAuth()
   },
   computed: {
     getTodo: function () {
-      let todo = this.getAllTodo()
-      return todo
+      return this.tasks.filter(function (task) {
+        return task.category == 'todo'
+      })
+    },
+    getCategory: function () {
+
     },
   }
 })
+*/
