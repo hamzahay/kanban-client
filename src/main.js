@@ -1,9 +1,19 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+import GAuth from 'vue-google-oauth2'
+const gauthOption = {
+  clientId: '627068272540-v2oroqpdufel89n5o0ofk01864bu736r.apps.googleusercontent.com',
+  scope: 'profile email',
+  prompt: 'select_account'
+}
+Vue.use(GAuth, gauthOption)
+
 new Vue ({
   render: h => h(App)
 }).$mount('#app');
+
+
 
 /*
 const app = new Vue ({
@@ -86,7 +96,14 @@ const app = new Vue ({
       })
     },
     getCategory: function () {
-
+      let category = []
+      this.tasks.forEach( function (task) {
+        let key = task.category
+        let sameCategory = false
+        category.forEach(function (el) {
+          if (key == el)
+        })
+      })
     },
   }
 })

@@ -1,14 +1,26 @@
 <template>
   <div>
-    <nav-bar v-on:changePage="changePage"></nav-bar>
+    <nav-bar 
+    v-on:changePage="changePage" 
+    v-bind:logedIn="logedIn"
+    v-bind:username="username"
+    v-bind:page="page"
+    ></nav-bar>
     <login-form 
     v-if="page == 'login'"
     v-bind:baseUrl="baseUrl"
     v-on:changePage="changePage"
     ></login-form>
+    <register-form 
+    v-bind:baseUrl="baseUrl" 
+    v-else-if="page == 'register'"
+    v-on:changePage="changePage"
+    ></register-form>
     <main-page
+    v-on:refresh="refresh"
     v-else-if="page == 'mainPage'"
     v-bind:baseUrl="baseUrl"
+    v-bind:tasks="tasks"
     v-bind:category="category"
     ></main-page>
   </div>
@@ -31,7 +43,13 @@ export default {
     done: '',
     page: '',
     baseUrl: 'http://localhost:3000',
-    category: [],
+    category: [
+      'Backlog',
+      'Todo',
+      'Doing',
+      'Done',
+    ],
+    logedIn: '',
     }
   },
   components: {
@@ -42,8 +60,11 @@ export default {
   },
   methods: {
     changePage: function (page) {
+      this.logedIn = false
       this.page = page
-      this.checkAuth()
+      if (page == 'login' || page == 'mainPage') {
+        this.checkAuth()
+      }
     },
     getAllTasks: function () {
       axios({
@@ -55,7 +76,6 @@ export default {
       })
       .then(response => {
         this.tasks = response.data
-        this.getCategory()
       })
       .catch(err => {
         console.log(err)
@@ -64,29 +84,20 @@ export default {
     checkAuth: function () {
       let selectedPage = ''
       if (!localStorage.getItem('access_token')) {
+        this.logedIn = false
         selectedPage = 'login'
       } else {
+        this.logedIn = true
         this.getAllTasks()
         this.username = localStorage.getItem('username')
         selectedPage = 'mainPage'
       }
       this.page = selectedPage
     },
-    getCategory: function () {
-      let flag = false
-      let data = {}
-      this.tasks.forEach(function (task) {
-        let key = task.category
-        if (data[key] == undefined) {
-          data[key] = []
-          data[key].push(task)
-        } else {
-          data[key].push(task)
-        }
-      })
-      console.log(data, "category")
-      this.category = data
-    },
+    refresh: function () {
+      console.log('in app')
+      this.checkAuth()
+    }
   },
   created: function () {
     this.checkAuth()

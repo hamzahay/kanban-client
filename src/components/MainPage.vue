@@ -5,9 +5,12 @@
     <div class="row" id="mainPage">
       <div class="col-md-1"></div>
       <tasks-list 
-      v-for="(task, idx) in category" :key="idx" 
-      v-bind:task="task"
+      v-on:refresh="$emit('refresh')"
+      v-for="(item, idx) in category" :key="idx" 
+      v-bind:tasks="tasks"
       v-bind:baseUrl="baseUrl"
+      v-bind:cardTitle="item"
+      v-bind:category="category"
       class="col-md-2">
       </tasks-list>
       <div class="col-md-1"></div>
@@ -31,11 +34,10 @@ export default {
     TaskForm
   },
   props: [
+    'tasks',
     'category',
     'baseUrl',
   ],
-  methods: {
-  },
 }
 </script>
 

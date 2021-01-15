@@ -56,9 +56,8 @@ export default {
       })
     },
     changeFormStatus: function () {
-      console.log('changeFormStatus')
       this.$emit('changeFormStatus', false)
-    }
+    },
   }
 }
 </script>

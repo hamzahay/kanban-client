@@ -26,6 +26,29 @@ export default {
       regisUsername: '',
       regisPassword: '',
     }
+  },
+  props: [
+    'baseUrl',
+  ],
+  methods: {
+    register: function () {
+      axios({
+        method: 'post',
+        url: `${this.baseUrl}/users/register`,
+        data: {
+          email: this.regisEmail,
+          username: this.regisUsername,
+          password: this.regisPassword,
+        }
+      })
+      .then(response => {
+        console.log(response)
+        this.$emit('changePage', 'login')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
   }
 }
 </script>
