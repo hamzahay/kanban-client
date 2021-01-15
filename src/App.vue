@@ -61,9 +61,10 @@ export default {
   methods: {
     changePage: function (page) {
       this.logedIn = false
-      this.page = page
       if (page == 'login' || page == 'mainPage') {
         this.checkAuth()
+      } else {
+        this.page = page
       }
     },
     getAllTasks: function () {
@@ -95,14 +96,11 @@ export default {
       this.page = selectedPage
     },
     refresh: function () {
-      console.log('in app')
       this.checkAuth()
     }
   },
   created: function () {
     this.checkAuth()
-  },
-  computed: {
   },
 }
 </script>

@@ -1,18 +1,28 @@
 <template>
   
   <!-- Register Form -->
-    <div class="row" id="regis-form">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <form v-on:submit.prevent="register">
-          <input v-model="regisEmail" type="text" placeholder="Email"><br>
-          <input v-model="regisUsername" type="text" placeholder="Username"><br>
-          <input v-model="regisPassword" type="password" placeholder="Password"><br>
-          <button class="btn btn-primary" id="regis-btn" type="submit">Register</button>
-        </form>
-      </div>
-      <div class="col-md-4"></div>
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 register-form">
+      <form v-on:submit.prevent="register">
+        <h2>REGISTER</h2>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" v-model="regisEmail" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" v-model="regisUsername" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" v-model="regisPassword" class="form-control" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
+    <div class="col-md-4"></div>
+  </div>
     <!-- Register Form End -->
 
 </template>
@@ -54,5 +64,25 @@ export default {
 </script>
 
 <style scoped>
+.register-form {
+    background-color: rgb(73, 73, 73);
+    border: 1px solid black;
+    padding: 5px 10px 30px 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+  }
 
+  button {
+    margin-top: 10px;
+  }
+
+  h2 {
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid black;
+  }
+
+  label {
+    color: white;
+  }
 </style>
